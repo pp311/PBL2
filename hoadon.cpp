@@ -23,9 +23,7 @@ int HoaDon::count = 0; //so HoaDon
     void HoaDon::CreateHoaDon(vector<HoaDon> hoaDon)
     {
         system("cls");
-        if(hoaDon.size() == hoaDon.capacity()) {
-			hoaDon.reserve (hoaDon.size() + 10);
-		}
+		hoaDon.resize(count + 10);
 		hoaDon[count++].Nhap();
     }
     void HoaDon::setMaHoaDon(string mhd ){

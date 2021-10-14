@@ -9,15 +9,19 @@ using namespace std;
 #include <vector>
 vector<MayTinh> mayTinh;
 vector<HoaDon> hoaDon;
-KhachHang khachHang[100];
+vector<KhachHang> khachHang;
+//KhachHang khachHang[100];
 //MayTinh mayTinh[100];
 ThongTinHoaDon thongTinHoaDon[100];
 int main() {
 	MayTinh::CreateMayTinh(mayTinh);
+    MayTinh::CreateMayTinh(mayTinh);
+
     MayTinh::ReadSanPham(mayTinh);
     //Kho::ReadKho(kho);
 	//KhachHang::ReadKhachHang(khachHang);
     //HoaDon::ReadHoaDon(hoaDon);
     //ThongTinHoaDon::ReadThongTinHoaDon(thongTinHoaDon);
+    system("pause");
     return 0;
 }

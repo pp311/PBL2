@@ -20,9 +20,7 @@ int KhachHang::count = 0; //so KhachHang
             }
     void KhachHang::CreateKhachHang(vector<KhachHang> khachHang) {
             system("cls");
-            if(khachHang.size()==khachHang.capacity()){
-				khachHang.reserve(khachHang.size()+10);
-			}
+			khachHang.resize(count+10);
 			khachHang[count++].Nhap();
         }
     void KhachHang::setMaKhachHang(string mkh)

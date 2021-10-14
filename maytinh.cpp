@@ -28,17 +28,20 @@ int MayTinh::count = 0; //so sanpham
         cin >> this->thoiGianBaoHanh;
         cout << "\nNhap gia ban: ";
         cin >> this->giaBan;
+        cout << this->maMay << "\t" << this->tenHang << "\t" << this->cpu << "\t" << this->ram << "\t" << this->disk << "\t" << this->namSX << "\t" << this->xuatXu << "\t" << this->thoiGianBaoHanh << "\t" << this->giaBan << "\n";
 		fstream file("maytinh.txt", ios::app);
+       
+        //cout << this->maMay << "\t" << this->tenHang << "\t" << this->cpu << "\t" << this->ram << "\t" << this->disk << "\t" << this->namSX << "\t" << this->xuatXu << "\t" << this->thoiGianBaoHanh << "\t" << this->giaBan << "\n";
+
         file << this->maMay << "\t" << this->tenHang << "\t" << this->cpu << "\t" << this->ram << "\t" << this->disk << "\t" << this->namSX << "\t" << this->xuatXu << "\t" << this->thoiGianBaoHanh << "\t" << this->giaBan << "\n";
         file.close();
     }
     void MayTinh::CreateMayTinh(vector<MayTinh> mayTinh)
     {
         system("cls");
-		if(mayTinh.size() == mayTinh.capacity()) {
-			mayTinh.reserve(mayTinh.size() + 10);
-		}
+		mayTinh.resize(count + 5);
 		mayTinh[count++].Nhap();
+
     }
     void MayTinh::setMaMay(string mm)
     {
@@ -104,7 +107,7 @@ int MayTinh::count = 0; //so sanpham
 		return thoiGianBaoHanh;
     }
     void MayTinh::ReadSanPham(vector<MayTinh> mayTinh){
-        system("cls");
+        //system("cls");
         fstream file("maytinh.txt", ios::in);
 		MayTinh input;
         int i = 0;

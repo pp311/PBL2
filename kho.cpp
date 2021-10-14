@@ -12,14 +12,15 @@ int Kho::count = 0; //so sanpham
         cin >> this->maSanPham;
         cout << "\nNhap so luong : ";
         cin >> this->soLuong;
+        fstream file("kho.txt", ios::app);
+        file << this->maSanPham << "\t" << this->soLuong << "\n";
+        file.close();
     }
-    void Kho::CreateKho()
+    void Kho::CreateKho(vector<Kho> kho)
     {
         system("cls");
-        Nhap();
-        fstream file("Kho.txt", ios::app);
-        file <<this->maSanPham << "\t" << this->soLuong << "\n";
-        file.close();
+        kho.resize(count + 10);
+        kho[count++].Nhap();
     }
     void Kho::setMaSanPham(string msp)
     {
@@ -35,19 +36,20 @@ int Kho::count = 0; //so sanpham
     int Kho::getSoLuong(){
     return soLuong;
     }
-    void Kho::ReadKho(Kho sanPham[])
+    void Kho::ReadKho(vector<Kho> kho)
     {
         system("cls");
         fstream file("Kho.txt", ios::in);
         int i = 0;
-
+        Kho input;
         while (!file.eof())
         {
             string temp;
-            getline(file, sanPham[i].maSanPham, '\t');
-            getline(file, temp, '\t'); 
-            sanPham[i].soLuong = atoi(temp.c_str());
-            cout << "San pham trong kho "<<i+1<<":" << sanPham[i].maSanPham << " " << sanPham[i].soLuong << endl;
+            getline(file, input.maSanPham, '\t');
+            getline(file, temp); 
+            input.soLuong = atoi(temp.c_str());
+            kho.push_back(input);
+            cout << "San pham trong kho "<<i+1<<":" << input.maSanPham << " " << input.soLuong << endl;
             i++;
         }
         count = i;
