@@ -17,12 +17,12 @@ int main() {
 	//MayTinh::CreateMayTinh(mayTinh);
     //MayTinh::CreateMayTinh(mayTinh);
 
-    MayTinh::ReadSanPham(mayTinh);
+    MayTinh::ReadMayTinh(mayTinh);
 
-    //MayTinh::DeleteMayTinh(mayTinh);
-    MayTinh::EditMayTinh(mayTinh);
+    MayTinh::DeleteMayTinh(mayTinh);
+    //MayTinh::EditMayTinh(mayTinh);
 
-    MayTinh::ReadSanPham(mayTinh);
+    MayTinh::ReadMayTinh(mayTinh);
 
     //Kho::ReadKho(kho);
 	//KhachHang::ReadKhachHang(khachHang);

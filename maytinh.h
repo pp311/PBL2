@@ -41,6 +41,6 @@ public:
     string getXuatXu();
 	int getGiaBan();
     int getThoiGianBaoHanh();
-    static void ReadSanPham(vector<MayTinh>& mayTinh);
+    static void ReadMayTinh(vector<MayTinh>& mayTinh);
 };
 #endif

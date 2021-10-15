@@ -141,7 +141,7 @@ int MayTinh::count = 0; //so sanpham
     int MayTinh::getThoiGianBaoHanh(){
 		return thoiGianBaoHanh;
     }
-    void MayTinh::ReadSanPham(vector<MayTinh>& mayTinh){
+    void MayTinh::ReadMayTinh(vector<MayTinh>& mayTinh){
         //system("cls");
         fstream file("maytinh.txt", ios::in);
 		MayTinh input;
@@ -150,7 +150,7 @@ int MayTinh::count = 0; //so sanpham
         while (!file.eof())
         {
             string temp;
-			if(!getline(file, input.maMay, '\t')) break; //kiem tra dong trong
+			if(!getline(file, input.maMay, '\t') || input.maMay.length() <= 1) break; //kiem tra dong trong
             getline(file, input.tenHang, '\t');
             getline(file, input.cpu, '\t');
             getline(file, input.ram, '\t');
