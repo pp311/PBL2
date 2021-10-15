@@ -19,7 +19,10 @@ class MayTinh
     static int count;
 public:
     void Nhap();
-    static void CreateMayTinh(vector<MayTinh> mayTinh);
+    static void CreateMayTinh(vector<MayTinh>& mayTinh);
+    static void DeleteMayTinh(vector<MayTinh>& mayTinh);
+    static void EditMayTinh(vector<MayTinh>& mayTinh);
+    void WriteToFileMayTinh(string tenFile);
     void setMaMay(string );
     void setTenHang(string );
     void setCpu(string );
@@ -38,6 +41,6 @@ public:
     string getXuatXu();
 	int getGiaBan();
     int getThoiGianBaoHanh();
-    static void ReadSanPham(vector<MayTinh> mayTinh);
+    static void ReadSanPham(vector<MayTinh>& mayTinh);
 };
 #endif

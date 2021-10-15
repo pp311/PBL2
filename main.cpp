@@ -14,10 +14,16 @@ vector<KhachHang> khachHang;
 //MayTinh mayTinh[100];
 ThongTinHoaDon thongTinHoaDon[100];
 int main() {
-	MayTinh::CreateMayTinh(mayTinh);
-    MayTinh::CreateMayTinh(mayTinh);
+	//MayTinh::CreateMayTinh(mayTinh);
+    //MayTinh::CreateMayTinh(mayTinh);
 
     MayTinh::ReadSanPham(mayTinh);
+
+    //MayTinh::DeleteMayTinh(mayTinh);
+    MayTinh::EditMayTinh(mayTinh);
+
+    MayTinh::ReadSanPham(mayTinh);
+
     //Kho::ReadKho(kho);
 	//KhachHang::ReadKhachHang(khachHang);
     //HoaDon::ReadHoaDon(hoaDon);

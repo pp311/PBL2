@@ -2,7 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include <cstdio>
 #include <vector>
+#include <filesystem>
 using namespace std;
 
 int MayTinh::count = 0; //so sanpham
@@ -28,20 +30,53 @@ int MayTinh::count = 0; //so sanpham
         cin >> this->thoiGianBaoHanh;
         cout << "\nNhap gia ban: ";
         cin >> this->giaBan;
-        cout << this->maMay << "\t" << this->tenHang << "\t" << this->cpu << "\t" << this->ram << "\t" << this->disk << "\t" << this->namSX << "\t" << this->xuatXu << "\t" << this->thoiGianBaoHanh << "\t" << this->giaBan << "\n";
-		fstream file("maytinh.txt", ios::app);
-       
-        //cout << this->maMay << "\t" << this->tenHang << "\t" << this->cpu << "\t" << this->ram << "\t" << this->disk << "\t" << this->namSX << "\t" << this->xuatXu << "\t" << this->thoiGianBaoHanh << "\t" << this->giaBan << "\n";
-
-        file << this->maMay << "\t" << this->tenHang << "\t" << this->cpu << "\t" << this->ram << "\t" << this->disk << "\t" << this->namSX << "\t" << this->xuatXu << "\t" << this->thoiGianBaoHanh << "\t" << this->giaBan << "\n";
+    }
+    void MayTinh::WriteToFileMayTinh(string tenFile) {
+		fstream file(tenFile, ios::app);
+        file << this->maMay << "\t" << this->tenHang << "\t" << this->cpu << "\t" << this->ram << "\t" << this->disk << "\t" << this->namSX << "\t" << this->xuatXu << "\t" 
+            << this->thoiGianBaoHanh << "\t" << this->giaBan << "\n";
         file.close();
     }
-    void MayTinh::CreateMayTinh(vector<MayTinh> mayTinh)
+    void MayTinh::CreateMayTinh(vector<MayTinh>& mayTinh)
     {
         system("cls");
 		mayTinh.resize(count + 5);
-		mayTinh[count++].Nhap();
-
+		mayTinh[count].Nhap();
+        mayTinh[count].WriteToFileMayTinh("maytinh.txt");
+        count++;
+    }
+    void MayTinh::DeleteMayTinh(vector<MayTinh>& mayTinh) {
+        string maMay;
+        cout << "Nhap ma may tinh can xoa: ";
+        cin >> maMay;
+        for (int i = 0; i < count; i++) {
+            if (mayTinh[i].maMay != maMay) {
+                mayTinh[i].WriteToFileMayTinh("maytinhtam.txt");
+            }
+            else {
+              mayTinh.erase(mayTinh.begin() + i, mayTinh.begin() + 1);
+            }
+        }
+               count--;
+        remove("maytinh.txt");
+        rename("maytinhtam.txt", "maytinh.txt");
+    }
+    void MayTinh::EditMayTinh(vector<MayTinh>& mayTinh) {
+        string maMay;
+        MayTinh input;
+        cout << "Nhap thong tin may tinh can chinh sua: ";
+        input.Nhap();
+        for (int i = 0; i < count; i++) {
+            if (mayTinh[i].maMay != input.maMay) {
+                mayTinh[i].WriteToFileMayTinh("maytinhtam.txt");
+            }
+            else {
+                mayTinh[i] = input;
+                input.WriteToFileMayTinh("maytinhtam.txt");
+            }
+        }
+        remove("maytinh.txt");
+        rename("maytinhtam.txt", "maytinh.txt");
     }
     void MayTinh::setMaMay(string mm)
     {
@@ -106,7 +141,7 @@ int MayTinh::count = 0; //so sanpham
     int MayTinh::getThoiGianBaoHanh(){
 		return thoiGianBaoHanh;
     }
-    void MayTinh::ReadSanPham(vector<MayTinh> mayTinh){
+    void MayTinh::ReadSanPham(vector<MayTinh>& mayTinh){
         //system("cls");
         fstream file("maytinh.txt", ios::in);
 		MayTinh input;
@@ -115,7 +150,7 @@ int MayTinh::count = 0; //so sanpham
         while (!file.eof())
         {
             string temp;
-			if(!getline(file, input.maMay, '\t')) break; //kieu tra dong trong
+			if(!getline(file, input.maMay, '\t')) break; //kiem tra dong trong
             getline(file, input.tenHang, '\t');
             getline(file, input.cpu, '\t');
             getline(file, input.ram, '\t');
@@ -128,7 +163,8 @@ int MayTinh::count = 0; //so sanpham
             getline(file, temp);
             input.giaBan = atoi(temp.c_str());
 			mayTinh.push_back(input);
-            cout << "Thong tin may "<<i+1<<":" << input.maMay << " " << input.tenHang << " " << input.cpu << " " << input.ram << " " << input.disk << " " << input.xuatXu << " " << input.thoiGianBaoHanh << " " << input.giaBan << endl;
+            cout << "Thong tin may "<<i+1<<":" << input.maMay << " " << input.tenHang << " " << input.cpu << " " << input.ram << " " << input.disk << " " << input.namSX<<" " << input.xuatXu << " " <<
+                input.thoiGianBaoHanh << " " << input.giaBan << endl;
             i++;
         }
         count = i;
