@@ -15,7 +15,9 @@
 - gộp file thongtinhoadon vào hoadon
 - đổi tên các hàm create thành add (createmaytinh -> addmaytinh)
 - trong menu chỉnh sửa thông tin và xóa thông tin, bỏ mục xóa thông tin kho và chỉnh sửa thông tin kho (vì đã gộp kho vs maytinh,sau sẽ tạo thành 1 chức năng riêng là nhập hàng về)
+- đã thêm hàm checktontai cho file máy tính (trả về vị trí trong vector, nếu ko tồn tại thì return -1)
 - thêm hàm show1maytinh (tương tự hàm showmaytinh nhưng truyền thêm mamay vào, chỉ in ra thông tin của 1 máy tính) -> cần làm tương tự cho các class khác
 - tạm hoàn thiện hàm editmaytinh (thiếu phần xác nhận chỉnh sửa thông tin)
 - hàm deletemaytinh thiếu phần xác nhận
 - bỏ hàm thêm hóa đơn (tách ra thành chức năng lập hóa đơn)
+- 
