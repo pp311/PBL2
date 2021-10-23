@@ -18,3 +18,4 @@
 - thêm hàm show1maytinh (tương tự hàm showmaytinh nhưng truyền thêm mamay vào, chỉ in ra thông tin của 1 máy tính) -> cần làm tương tự cho các class khác
 - tạm hoàn thiện hàm editmaytinh (thiếu phần xác nhận chỉnh sửa thông tin)
 - hàm deletemaytinh thiếu phần xác nhận
+- bỏ hàm thêm hóa đơn (tách ra thành chức năng lập hóa đơn)
