@@ -11,6 +11,7 @@
 - Làm menu thêm, sửa, xóa thông tin
 - gộp file kho vào file maytinh
 - mặc định khi tạo 1 maytinh thì số lượng = 0
+- 
 23/10/2021
 - gộp file thongtinhoadon vào hoadon
 - đổi tên các hàm create thành add (createmaytinh -> addmaytinh)
