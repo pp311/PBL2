@@ -43,30 +43,57 @@ int MayTinh::count = 0; //so sanpham
     void MayTinh::AddMayTinh(vector<MayTinh>& mayTinh)
     {
         system("cls");
-		mayTinh.resize(count + 5);
-		mayTinh[count].Nhap();
+    NhapLai:
+        mayTinh.resize(count + 5);
+        mayTinh[count].Nhap();
         mayTinh[count].WriteToFileMayTinh("maytinh.txt");
         count++;
+        int chon;
+        cout << "Them thanh cong";
+        cout << "\nBan co muon tiep tuc them?";
+        cout << "\n 1. Co" << "\n 2. Khong" << endl;
+        cin >> chon;
+        if (chon == 1) goto NhapLai;
     }
     //delete may tinh
     void MayTinh::DeleteMayTinh(vector<MayTinh>& mayTinh) {
         string maMay;
+        int pos;
+    NhapLai:
+        system("cls");
         cout << "Nhap ma may tinh can xoa: ";
         cin >> maMay;
-        for (int i = 0; i < count; i++) {
-            if (mayTinh[i].maMay != maMay) {
-                mayTinh[i].WriteToFileMayTinh("maytinhtam.txt");
-            }
-            else {
-              mayTinh.erase(mayTinh.begin() + i, mayTinh.begin() + i + 1);
-            }
+        pos = CheckTonTai(mayTinh, maMay);
+        if (pos == -1) {
+            cout << "May tinh nay khong ton tai. Vui long nhap lai!";
+            goto NhapLai;
         }
-        count--;
-        remove("maytinh.txt");
-        rename("maytinhtam.txt", "maytinh.txt");
-    }
-    //chinh sua may tinh
-    
+        else {
+        Show1MayTinh(mayTinh, maMay);
+        char c;
+        cout << "Xac nhan xoa may tinh nay khoi he thong? <Y/N>";
+        cin >> c;
+        if (c == 'N' || c == 'n') goto NhapLai;
+            for (int i = 0; i < count; i++) {
+                if (mayTinh[i].maMay != maMay) {
+                    mayTinh[i].WriteToFileMayTinh("maytinhtam.txt");
+                }
+                else {
+                    mayTinh.erase(mayTinh.begin() + i, mayTinh.begin() + i + 1);
+                }
+            }
+            count--;
+            remove("maytinh.txt");
+            rename("maytinhtam.txt", "maytinh.txt");
+            cout << "Xoa thanh cong!";
+            int chon;
+            cout << "\nBan co muon tiep tuc xoa?";
+            cout << "\n 1. Co" << "\n 2. Khong" << endl;
+            cout << "Lua chon: ";
+            cin >> chon;
+            if (chon == 1) goto NhapLai;
+        }
+    }   
     //Neu ton tai thi tra ve vi tri. neu khong thi tra ve -1
     int MayTinh::CheckTonTai(vector<MayTinh>& mayTinh, string maMay) {
         for (int i = 0; i < count; i++) {
@@ -77,12 +104,10 @@ int MayTinh::count = 0; //so sanpham
         return -1;
     }
     void MayTinh::ReadMayTinh(vector<MayTinh>& mayTinh) {
-        //system("cls");
         fstream file("maytinh.txt", ios::in);
         MayTinh input;
         int i = 0;
         string temp;
-        // file>>this->maMay>>this->tenHang>>this->cpu>>this->ram>>this->disk>>this->namSX>>this->xuatXu>>this->thoiGianBaoHanh>>this->giaBan;
         while (!file.eof())
         {
             string temp;
@@ -96,13 +121,11 @@ int MayTinh::count = 0; //so sanpham
             getline(file, input.xuatXu, '\t');
             getline(file, temp, '\t');
             input.thoiGianBaoHanh = atoi(temp.c_str());
-            getline(file, temp);
+            getline(file, temp,'\t');
             input.giaBan = atoi(temp.c_str());
             getline(file, temp);
             input.soLuong = atoi(temp.c_str());
             mayTinh.push_back(input);
-            //cout << "Thong tin may " << i + 1 << ":" << input.maMay << " " << input.tenHang << " " << input.cpu << " " << input.ram << " " << input.disk << " " << input.namSX << " " << input.xuatXu << " " <<
-              //  input.thoiGianBaoHanh << " " << input.giaBan << endl;
             i++;
         }
         count = i;
@@ -110,7 +133,8 @@ int MayTinh::count = 0; //so sanpham
     }
     void MayTinh::ShowMayTinh(vector<MayTinh>& mayTinh) {
         cout << "\n\n\n\t";
-        cout <<left<< setw(10)<<"Ma May"<<setw(12)<<"Ten Hang" <<setw(10)<<"CPU" << setw(10)<<"Ram" <<setw(10)<<"Disk"<<setw(18)<<"Nam San Xuat" << setw(15) << "Xuat Xu" << setw(10) << "TGBH" << setw(15) << "Gia" << endl;
+        cout <<left<< setw(10)<<"Ma May"<<setw(12)<<"Ten Hang" <<setw(10)<<"CPU" << setw(10)<<"Ram" <<setw(10)<<"Disk"<<setw(18)
+            <<"Nam San Xuat" << setw(15) << "Xuat Xu" << setw(10) << "TGBH" << setw(15) << "Gia" << endl;
         for (int i = 0; i < count; i++) {
             cout << "\t";
             cout << setw(10)<< mayTinh[i].maMay;
@@ -123,6 +147,7 @@ int MayTinh::count = 0; //so sanpham
             cout << setw(10) << mayTinh[i].thoiGianBaoHanh;
             cout << setw(15) << mayTinh[i].giaBan << endl;
         }
+        cout << "\n\n\n\t";
     }
     void MayTinh::Show1MayTinh(vector<MayTinh>& mayTinh, string maMay) {
         cout << "\n\n\n\t";
@@ -185,7 +210,7 @@ int MayTinh::count = 0; //so sanpham
         }
     }
     void MayTinh::EditMayTinh(vector<MayTinh>& mayTinh) {
-        system("cls");
+        //system("cls");
         string maMay;
         int pos;
     NhapLai1:
@@ -213,47 +238,47 @@ int MayTinh::count = 0; //so sanpham
             cout << "\n7. Thoi gian bao hanh";
             cout << "\n8. Gia ban";
             cout << "\n-------------";
-            cout << "\nNhap lua chon:";
+            cout << "\nNhap lua chon: ";
             cin >> luaChon;
             switch (luaChon) {
             case 1:
-                cout << "\nNhap ten hang:";
+                cout << "\nNhap ten hang: ";
                 cin >> temp;
                 mayTinh[pos].tenHang = temp;
                 break;
             case 2:
-                cout << "\nNhap CPU:";
+                cout << "\nNhap CPU: ";
                 cin >> temp;
                 mayTinh[pos].cpu = temp;
                 break;
             case 3:
-                cout << "\nNhap dung luong ram:";
+                cout << "\nNhap dung luong ram: ";
                 cin >> temp;
                 mayTinh[pos].ram = temp;
                 break;
             case 4:
-                cout << "\nNhap dung luong o cung:";
+                cout << "\nNhap dung luong o cung: ";
                 cin >> temp;
                 mayTinh[pos].disk = temp;
                 break;
             case 5:
-                cout << "\nNhap nam san xuat:";
+                cout << "\nNhap nam san xuat: ";
                 cin >> num;
                 mayTinh[pos].namSX = num;
                 break;
             case 6:
-                cout << "\nNhap noi xuat xu:";
+                cout << "\nNhap noi xuat xu: ";
                 cin.ignore();
                 getline(cin, temp);
                 mayTinh[pos].tenHang = temp;
                 break;
             case 7:
-                cout << "\nNhap thoi gian bao hanh:";
+                cout << "\nNhap thoi gian bao hanh: ";
                 cin >> num;
                 mayTinh[pos].thoiGianBaoHanh = num;
                 break;
             case 8:
-                cout << "\nNhap gia ban:";
+                cout << "\nNhap gia ban: ";
                 cin >> num;
                 mayTinh[pos].giaBan = num;
                 break;
@@ -266,6 +291,7 @@ int MayTinh::count = 0; //so sanpham
             cout << "Sua doi thanh cong!";
             cout << "\nBan co muon tiep tuc chinh sua?";
             cout << "\n 1. Co"<<"\n 2. Khong"<<endl;
+            cout << "Lua chon: ";
             cin >> chon;
             if (chon == 1) goto NhapLai2;
             for (int i = 0; i < count; i++) {

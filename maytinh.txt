@@ -1,0 +1,2 @@
+m001	dell	i5	8gb	128gb	2019	My	18	14000000	14
+m002	asus	i3	4gb	64gb	2017	Trung Quoc	6	8000000	8

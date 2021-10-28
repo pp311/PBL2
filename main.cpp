@@ -37,7 +37,7 @@ void LietKeThongTin() {
             break;
         case 2:
             system("cls");
-            //HoaDon::ShowHoaDon(hoaDon);
+            HoaDon::ShowHoaDon(hoaDon, khachHang, mayTinh);
             tiepTuc();
             break;
         case 3:
@@ -207,6 +207,7 @@ void menu() {
             break;
         case 5:
             //cout << "\n5. Lap hoa don";
+            HoaDon::AddHoaDon(hoaDon, khachHang, mayTinh);
             break;
         case 6:
            // cout << "\n6. Thoat";
@@ -220,6 +221,8 @@ void menu() {
 }
 int main() {
     MayTinh::ReadMayTinh(mayTinh);
+    KhachHang::ReadKhachHang(khachHang);
+    HoaDon::ReadHoaDon(hoaDon);
     menu();
     return 0;
 }

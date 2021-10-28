@@ -18,6 +18,8 @@ public:
     static void DeleteKhachHang(vector<KhachHang>&);
     static void EditKhachHang(vector<KhachHang>&);
     static void ShowKhachHang(vector<KhachHang>&);
+    static void Show1KhachHang(vector<KhachHang>&, string);
+    static int CheckTonTai(vector<KhachHang>&, string);
     void WriteToFileKhachHang(string);
     void setMaKhachHang(string);
     void setTenKhachHang(string);
@@ -31,5 +33,6 @@ public:
     string getDienThoai();
     int getNamSinh();
     string getGioiTinh();   
+    friend class HoaDon;
 };
 #endif

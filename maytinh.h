@@ -50,5 +50,6 @@ public:
     int getThoiGianBaoHanh();
     void setSoLuong(int);
     int getSoLuong();
+    friend class HoaDon;
 };
 #endif
