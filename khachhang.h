@@ -12,8 +12,8 @@ class KhachHang {
    
     static int count;
 public:
-    void Nhap();
-    static void AddKhachHang(vector<KhachHang>&);
+    void Nhap(vector<KhachHang>& , string);
+    static void AddKhachHang(vector<KhachHang>&, string = "");
     static void ReadKhachHang(vector<KhachHang>&);
     static void DeleteKhachHang(vector<KhachHang>&);
     static void EditKhachHang(vector<KhachHang>&);

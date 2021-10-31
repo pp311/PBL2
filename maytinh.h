@@ -19,8 +19,8 @@ class MayTinh
     int soLuong;
     static int count;
 public:
-    void Nhap();
-    static void AddMayTinh(vector<MayTinh>&);
+    void Nhap(vector<MayTinh>&, string);
+    static void AddMayTinh(vector<MayTinh>&, string = "");
     static void DeleteMayTinh(vector<MayTinh>&);
     static void EditMayTinh(vector<MayTinh>&);
     static void ReadMayTinh(vector<MayTinh>&);

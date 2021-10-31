@@ -1,33 +1,51 @@
-using namespace std;
+﻿using namespace std;
 #include "khachhang.h"
 #include "maytinh.h"
 #include "hoadon.h"
 #include "thongtinhoadon.h"
+#include "menu.h"
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
 #include <iomanip>
+#include <Windows.h>
+string t5();
+void tiepTuc();
 vector<MayTinh> mayTinh;
 vector<HoaDon> hoaDon;
 vector<KhachHang> khachHang;
+
+int main() {
+    //system("color 05");
+    MayTinh::ReadMayTinh(mayTinh);
+    KhachHang::ReadKhachHang(khachHang);
+    HoaDon::ReadHoaDon(hoaDon);
+    Menu::MainMenu();
+    return 0;
+}
+
 void tiepTuc() {
+    cout << "\t";
     system("pause");
     system("cls");
 }
-void LietKeThongTin() {
+string t5() {
+    return "\t\t\t\t\t";
+}
+void Menu::LietKeThongTin() {
     while (true) {
         system("cls");
         int key = 0;
-        cout << "CHUONG TRINH QUAN LY CUA HANG BAN MAY TINH \n";
-        cout << "*********LIET KE THONG TIN***********\n";
-        cout << "* 1. Liet ke may tinh               *\n";
-        cout << "* 2. Liet ke hoa don                *\n";
-        cout << "* 3. Liet ke khach hang             *\n";
-        cout << "* 4. Liet ke kho                    *\n";
-        cout << "* 5. Quay lai                       *\n";
-        cout << "*************************************\n";
-        nhapLai:
-        cout << "\nNhap tuy chon: ";
+        cout << "\n\n";
+        cout << t5() << " ======== LIET KE THONG TIN ========\n";
+        cout << t5() << "| 1. Liet ke may tinh               |\n";
+        cout << t5() << "| 2. Liet ke hoa don                |\n";
+        cout << t5() << "| 3. Liet ke khach hang             |\n";
+        cout << t5() << "| 4. Liet ke kho                    |\n";
+        cout << t5() << "| 5. Quay lai                       |\n";
+        cout << t5() << " ===================================\n";
+    nhapLai:
+        cout << endl << t5() << "Nhap tuy chon: ";
         cin >> key;
         switch (key) {
         case 1:
@@ -53,65 +71,61 @@ void LietKeThongTin() {
         case 5:
             return;
         default:
-            cout << "\nKhong co chuc nang nay!";
-            cout << "\nXin vui long chon lai!";
+            cout << "\n\tKhong co chuc nang nay!";
+            cout << "\n\tXin vui long chon lai!";
             goto nhapLai;
         }
     }
 }
-void ThemThongTin() {
+void Menu::ThemThongTin() {
     while (true) {
         system("cls");
         int key;
-        cout << "CHUONG TRINH QUAN LY CUA HANG BAN MAY TINH \n";
-        cout << "*********THEM THONG TIN***********\n";
-        cout << "* 1. Them thong tin may tinh     *\n";
-        cout << "* 2. Them thong tin khach hang   *\n";
-        cout << "* 3. Them thong tin kho          *\n";
-        cout << "* 4. Quay lai                    *\n";
-        cout << "**********************************\n";
-        nhapLai:
-        cout << "\nNhap tuy chon: ";
+        cout << "\n\n";
+        cout << t5() << " ========= THEM THONG TIN =========\n";
+        cout << t5() << "| 1. Them thong tin may tinh       |\n";
+        cout << t5() << "| 2. Them thong tin khach hang     |\n";
+        cout << t5() << "| 3. Quay lai                      |\n";
+        cout << t5() << " ==================================\n";
+    nhapLai:
+        cout << endl << t5() << "Nhap tuy chon: ";
         cin >> key;
         switch (key) {
         case 1:
             system("cls");
+            cout << "\n\n\t\t\t\t\t===== THEM THONG TIN MAY TINH =====\n\n";
             MayTinh::AddMayTinh(mayTinh);
             tiepTuc();
             break;
         case 2:
             system("cls");
+            cout << "\n\n\t\t\t\t\t===== THEM THONG TIN KHACH HANG =====\n\n";
             KhachHang::AddKhachHang(khachHang);
             tiepTuc();
             break;
         case 3:
-            system("cls");
-            MayTinh::AddKho(mayTinh);
-            tiepTuc();
-            break;
-        case 4:
             return;
         default:
-            cout << "\nKhong co chuc nang nay!";
-            cout << "\nXin vui long chon lai!";
+            cout << "\n\tKhong co chuc nang nay!";
+            cout << "\n\tXin vui long chon lai!";
             goto nhapLai;
         }
     }
 }
-void ChinhSuaThongTin() {
+void Menu::ChinhSuaThongTin() {
 start:
     while (true) {
         system("cls");
         int key;
-        cout << "CHUONG TRINH QUAN LY CUA HANG BAN MAY TINH \n";
-        cout << "*********CHINH SUA THONG TIN***********\n";
-        cout << "* 1. Chinh sua thong tin may tinh     *\n";
-        cout << "* 2. Chinh sua thong tin hoa don      *\n";
-        cout << "* 3. Chinh sua thong tin khach hang   *\n";
-        cout << "* 4. Quay lai                         *\n";
-        cout << "***************************************\n";
+        cout << "\n\n";
+        cout << t5() << " ======= CHINH SUA THONG TIN ========\n";
+        cout << t5() << "| 1. Chinh sua thong tin may tinh    |\n";
+        cout << t5() << "| 2. Chinh sua thong tin hoa don     |\n";
+        cout << t5() << "| 3. Chinh sua thong tin khach hang  |\n";
+        cout << t5() << "| 4. Quay lai                        |\n";
+        cout << t5() << " ====================================\n";
     nhapLai:
-        cout << "\nNhap tuy chon: ";
+        cout << endl << t5() << "Nhap tuy chon: ";
         cin >> key;
         switch (key) {
         case 1:
@@ -121,7 +135,7 @@ start:
             goto start;
             break;
         case 2:
-            //HoaDon::ChinhSuaThongTinHoaDon(hoaDon);
+            HoaDon::EditHoaDon(hoaDon);
             break;
         case 3:
             KhachHang::EditKhachHang(khachHang);
@@ -129,25 +143,25 @@ start:
         case 4:
             return;
         default:
-            cout << "\nKhong co chuc nang nay!";
-            cout << "\nXin vui long chon lai!";
+            cout << "\n\tKhong co chuc nang nay!";
+            cout << "\n\tXin vui long chon lai!";
             goto nhapLai;
         }
     }
 }
-void XoaThongTin() {
+void Menu::XoaThongTin() {
     while (true) {
         system("cls");
         int key;
-        cout << "CHUONG TRINH QUAN LY CUA HANG BAN MAY TINH \n";
-        cout << "*********XOA THONG TIN***********\n";
-        cout << "* 1. Xoa thong tin may tinh     *\n";
-        cout << "* 2. Xoa thong tin hoa don      *\n";
-        cout << "* 3. Xoa thong tin khach hang   *\n";
-        cout << "* 4. Quay lai                   *\n";
-        cout << "*********************************\n";
+        cout << "\n\n";
+        cout << t5() << " ========== XOA THONG TIN =========\n";
+        cout << t5() << "| 1. Xoa thong tin may tinh        |\n";
+        cout << t5() << "| 2. Xoa thong tin hoa don         |\n";
+        cout << t5() << "| 3. Xoa thong tin khach hang      |\n";
+        cout << t5() << "| 4. Quay lai                      |\n";
+        cout << t5() << " ==================================\n";
     nhapLai:
-        cout << "\nNhap tuy chon: ";
+        cout << endl << t5() << "Nhap tuy chon: ";
         cin >> key;
         switch (key) {
         case 1:
@@ -156,37 +170,43 @@ void XoaThongTin() {
             tiepTuc();
             break;
         case 2:
-            //HoaDon::XoaThongTinHoaDon(hoaDon);
+            system("cls");
+            HoaDon::DeleteHoaDon(hoaDon);
+            tiepTuc();
             break;
         case 3:
+            system("cls");
             KhachHang::DeleteKhachHang(khachHang);
+            tiepTuc();
             break;
         case 4:
             return;
         default:
-            cout << "\nKhong co chuc nang nay!";
-            cout << "\nXin vui long chon lai!";
+            cout << "\n\tKhong co chuc nang nay!";
+            cout << "\n\tXin vui long chon lai!";
             goto nhapLai;
         }
     }
 }
 
 
-void menu() {
+void Menu::MainMenu() {
     int key = 0;
     while (true) {
         system("cls");
-        cout << "CHUONG TRINH QUAN LY CUA HANG BAN MAY TINH \n";
-        cout << "***************MENU*****************\n";
-        cout << "* 1. Liet ke                       *\n";
-        cout << "* 2. Them thong tin                *\n";
-        cout << "* 3. Chinh sua thong tin           *\n";
-        cout << "* 4. Xoa thong tin                 *\n";
-        cout << "* 5. Lap hoa don                   *\n";
-        cout << "* 6. Thoat                         *\n";
-        cout << "************************************\n";
-        label:
-        cout << "\nNhap tuy chon: ";
+        cout << "\n\n" << t5() << " CHUONG TRINH QUAN LY BAN MAY TINH \n\n\n";
+        cout << t5() << " ============== MENU ==============\n";
+        cout << t5() << "| 1. Liet ke                       |\n";
+        cout << t5() << "| 2. Them thong tin                |\n";
+        cout << t5() << "| 3. Chinh sua thong tin           |\n";
+        cout << t5() << "| 4. Xoa thong tin                 |\n";
+        cout << t5() << "| 5. Nhap hang ve                  |\n";
+        cout << t5() << "| 6. Lap hoa don                   |\n";
+        cout << t5() << "| 7. Thong ke                      |\n";
+        cout << t5() << "| 8. Thoat                         |\n";
+        cout << t5() << " ==================================\n";
+    label:
+        cout << endl << t5() << "Nhap tuy chon : ";
         cin >> key;
         switch (key) {
         case 1:
@@ -206,23 +226,21 @@ void menu() {
             XoaThongTin();
             break;
         case 5:
+            MayTinh::AddKho(mayTinh);
+            break;
+        case 6:
             //cout << "\n5. Lap hoa don";
             HoaDon::AddHoaDon(hoaDon, khachHang, mayTinh);
             break;
-        case 6:
-           // cout << "\n6. Thoat";
+        case 7:
+            // cout << "\n6. Thoat";
+            return;
+        case 8:
             return;
         default:
-            cout << "\nKhong co chuc nang nay!";
-            cout << "\nHay chon chuc nang trong hop menu.";
+            cout << "\n\tKhong co chuc nang nay!";
+            cout << "\n\tHay chon chuc nang trong hop menu.";
             tiepTuc();
         }
     }
-}
-int main() {
-    MayTinh::ReadMayTinh(mayTinh);
-    KhachHang::ReadKhachHang(khachHang);
-    HoaDon::ReadHoaDon(hoaDon);
-    menu();
-    return 0;
 }

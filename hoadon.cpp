@@ -11,17 +11,18 @@ using namespace std;
 int HoaDon::count = 0; //so HoaDon
     void HoaDon::Nhap(vector<HoaDon>& hoaDon, vector<KhachHang>& khachHang, vector<MayTinh>& mayTinh)
     {
+        cout << "\n\n\t\t\t\t\t===== LAP HOA DON =====\n\n\t";
         NhapLaiMaHoaDon:
-        cout << "\nNhap ma hoa don: ";
+        cout << "\n\tNhap ma hoa don: ";
         cin >> this->maHoaDon;
         for (int i = 0; i < count; i++) {
             if (this->maHoaDon == hoaDon[i].maHoaDon) {
-                cout << "\nMa hoa don nay da ton tai, vui long nhap lai!";
+                cout << "\n\tMa hoa don nay da ton tai, vui long nhap lai!";
                 goto NhapLaiMaHoaDon;
             }
         }
         NhapLaiMaKhachHang:
-        cout << "\nNhap ma khach hang: ";
+        cout << "\n\tNhap ma khach hang: ";
         cin >> this->maKhachHang;
         bool tonTai = false;
         for (int i = 0; i < KhachHang::count; i++) {
@@ -29,18 +30,19 @@ int HoaDon::count = 0; //so HoaDon
         }
         if (tonTai == false) {
             char ch;
-            cout << "\nKhach hang nay khong ton tai trong he thong, ban co muon tao ho so moi? <Y/N>";
+            cout << "\n\tKhach hang nay khong ton tai trong he thong, ban co muon tao ho so moi? <Y/N>";
             cin >> ch;
             if (ch == 'Y' || ch == 'y') 
-                KhachHang::AddKhachHang(khachHang);
+                KhachHang::AddKhachHang(khachHang, this->maKhachHang);
             else goto NhapLaiMaKhachHang;
         }
-        cout << "\nNhap ngay ban: ";
+        cout << "\n\tNhap ngay ban: ";
         cin >> this->ngayBan;
         this->soSanPham = 0;
+        //this->tongTien = 0;
         while (true) {
             NhapLaiMaMay:
-            cout << "\nNhap ma san pham: ";
+            cout << "\n\tNhap ma san pham: ";
             cin >> this->maMay[this->soSanPham];
             int i = 0;
             bool tonTai = false;
@@ -52,23 +54,24 @@ int HoaDon::count = 0; //so HoaDon
                 }
             }
             if (tonTai == false) {
-                cout << "\nMa may nay khong ton tai, vui long nhap lai!";
+                cout << "\n\tMa may nay khong ton tai, vui long nhap lai!\n\t";
+                system("pause");
                 goto NhapLaiMaMay;
             }
             NhapLaiSoLuong:
-            cout << "\nNhap so luong mua: ";
+            cout << "\n\tNhap so luong mua: ";
             cin >> this->soLuong[this->soSanPham];
                 if (mayTinh[i].soLuong < this->soLuong[this->soSanPham]) {
                     int luaChon;
-                    cout << "\nSo luong may tinh tron kho khong du!\nSo luong con hien tai: " << mayTinh[i].soLuong;
-                    cout << "\n1. Nhap lai so luong\n2.Chon may khac";
-                    cout << "\n-------\nLua chon: ";
+                    cout << "\n\tSo luong may tinh tron kho khong du!\n\tSo luong con hien tai: " << mayTinh[i].soLuong;
+                    cout << "\n\t1. Nhap lai so luong\n\t2.Chon may khac";
+                    cout << "\n\t-------\n\tLua chon: ";
                 NhapLaiLuaChon:
                     cin >> luaChon;
                     if (luaChon == 1) goto NhapLaiSoLuong;
                     else if (luaChon == 2) goto NhapLaiMaMay;
                     else {
-                        cout << "\nKhong hop le! Vui long nhap lai lua chon: ";
+                        cout << "\n\tKhong hop le! Vui long nhap lai lua chon: ";
                         goto NhapLaiLuaChon;
                     }
                 }
@@ -79,16 +82,16 @@ int HoaDon::count = 0; //so HoaDon
                 }
                 remove("maytinh.txt");
                 rename("maytinhtam.txt", "maytinh.txt");
-            this->tongTien += this->donGia[this->soSanPham] * this->soLuong[this->soSanPham];
+            //this->tongTien += this->donGia[this->soSanPham] * this->soLuong[this->soSanPham];
             this->soSanPham++;
             char c;
-            cout << "\nMua tiep? <Y/N>";
+            cout << "\n\tMua tiep? <Y/N>";
             cin >> c;
             if (c == 'N' || c == 'n')
                 break;
         }
         this->TinhTien();
-        cout << "\nTao hoa don thanh cong!\n";
+        cout << "\n\tTao hoa don thanh cong!\n\t";
         system("pause");
     }
     void HoaDon::ShowChiTietHoaDon(vector<HoaDon>& hoaDon, vector<KhachHang>& khachHang, vector<MayTinh>& mayTinh) {
@@ -112,37 +115,65 @@ int HoaDon::count = 0; //so HoaDon
         for (int i = 0; i < this->soSanPham; i++) {
             cout << "\n\t" <<setw(15)<< this->maMay[i] << setw(15) << this->soLuong[i]<< setw(20) << this->donGia[i];
         }
-        cout << "\n\n\t" << "TONG CONG: " << this->tongTien << " VND";
+        cout << "\n\n\t" << "TONG CONG: " << this->tongTien << " VND"<<"\n\n\t";
     }
     void HoaDon::ShowHoaDon(vector<HoaDon>& hoaDon, vector<KhachHang>& khachHang, vector<MayTinh>& mayTinh) {
         Start:
         system("cls");
-        cout << "\n\n\t";
         string maHoaDon;
-        cout << left << setw(15) << "Ma Hoa Don" << setw(15) << "Ma Khach Hang" << setw(15) << "Ngay Ban" << setw(20) << "Tong tien";
+        cout << "\n\n\t\t\t\t\t===== DANH SACH HOA DON =====\n\n\t";
+        cout << left << setw(15) << "Ma Hoa Don" << setw(25) << "Ma Khach Hang" << setw(25) << "Ngay Ban" << setw(20) << "Tong tien"<<endl;
+        char prev = cout.fill('-');
+        cout.width(80);
+        cout << "\t-";
+        cout.fill(prev);
+        cout << endl;
         for (int i = 0; i < count; i++) {
-            cout << "\n\t";
+            cout << "\t";
             cout << setw(15) << hoaDon[i].maHoaDon;
-            cout << setw(15) << hoaDon[i].maKhachHang;
-            cout << setw(15) << hoaDon[i].ngayBan;
+            cout << setw(25) << hoaDon[i].maKhachHang;
+            cout << setw(25) << hoaDon[i].ngayBan;
             hoaDon[i].TinhTien();
-            cout << setw(20) << hoaDon[i].tongTien;
+            cout << setw(20) << hoaDon[i].tongTien<<endl;
         }
-        cout << "\n\nNhap ma hoa don de xem chi tiet:";
+        cout << "\n\n\tNhap ma hoa don de xem chi tiet: ";
         cin >> maHoaDon;
+        int pos = CheckTonTai(hoaDon, maHoaDon);
+        if (pos == -1) {
+            cout << "\n\tMa hoa don nay khong ton tai.";
+        }
         for (int i = 0; i < count; i++) {
             if (maHoaDon == hoaDon[i].maHoaDon) hoaDon[i].ShowChiTietHoaDon(hoaDon, khachHang, mayTinh);
         }
         char ch;
-        cout << "\n\nTiep tuc xem? <Y/N>";
+        cout << "\n\n\tTiep tuc xem? <Y/N>";
         cin >> ch;
         if (ch == 'Y' || ch == 'y') goto Start; 
+    }
+    void HoaDon::Show1HoaDon(vector<HoaDon>& hoaDon, string maHoaDon) {
+        cout << endl<<"\t";
+        cout << left << setw(15) << "Ma Hoa Don" << setw(25) << "Ma Khach Hang" << setw(25) << "Ngay Ban" << setw(20) << "Tong tien"<<endl;
+        char prev = cout.fill('-');
+        cout.width(80);
+        cout << "\t-";
+        cout.fill(prev);
+        cout << endl;
+        for (int i = 0; i < count; i++) {
+            if (hoaDon[i].maHoaDon == maHoaDon) {
+                cout << "\t";
+                cout << setw(15) << hoaDon[i].maHoaDon;
+                cout << setw(25) << hoaDon[i].maKhachHang;
+                cout << setw(25) << hoaDon[i].ngayBan;
+                hoaDon[i].TinhTien();
+                cout << setw(20) << hoaDon[i].tongTien << endl;
+            }
+        }
+        cout << "\n\n\t";
     }
     void HoaDon::TinhTien() {
         this->tongTien = 0;
         for (int i = 0; i < this->soSanPham; i++) {
-               this->tongTien += this->donGia[i] * this->soLuong[i];
-               break;          
+               this->tongTien += this->donGia[i] * this->soLuong[i];    
         }
     }
     void HoaDon::AddHoaDon(vector<HoaDon>& hoaDon, vector<KhachHang>& khachHang, vector<MayTinh>& mayTinh)
@@ -155,10 +186,35 @@ int HoaDon::count = 0; //so HoaDon
         system("pause");
         count++;
     }
+    int HoaDon::CheckTonTai(vector<HoaDon>& hoaDon, string maHoaDon) {
+        for (int i = 0; i < count; i++) {
+            if (hoaDon[i].maHoaDon == maHoaDon) {
+                return i;
+            }
+        }
+        return -1;
+    }
     void HoaDon::DeleteHoaDon(vector<HoaDon>& hoaDon) {
         string maHoaDon;
-        cout << "Nhap ma hoa don can xoa: ";
+        int pos;
+    NhapLai:
+        system("cls");
+        cout << "\n\n\t\t\t\t\t===== XOA THONG TIN HOA DON =====\n\n\t";
+        cout << "\n\tNhap ma hoa don can xoa: ";
         cin >> maHoaDon;
+        pos = CheckTonTai(hoaDon, maHoaDon);
+        if (pos == -1) {
+            cout << "\n\tMa hoa don nay khong ton tai. Vui long nhap lai!\n\t";
+            system("pause");
+            goto NhapLai;
+        }
+        else {
+            Show1HoaDon(hoaDon, maHoaDon);
+            char c;
+            cout << "\n\tXac nhan xoa thong tin hoa don nay khoi he thong? <Y/N>";
+            cin >> c;
+            if (c == 'N' || c == 'n') return;
+        }
         for (int i = 0; i < count; i++) {
             if (hoaDon[i].maHoaDon != maHoaDon) {
                 hoaDon[i].WriteToFileHoaDon("hoadontam.txt");
@@ -170,22 +226,73 @@ int HoaDon::count = 0; //so HoaDon
         count--;
         remove("hoadon.txt");
         rename("hoadontam.txt", "hoadon.txt");
+        cout << "\n\tXoa thanh cong!";
+        int chon;
+        cout << "\n\tBan co muon tiep tuc xoa?";
+        cout << "\n\t 1. Co" << "\n 2. Khong" << endl;
+        cout << "\n\tLua chon: ";
+        cin >> chon;
+        if (chon == 1) goto NhapLai;
     }
     void HoaDon::EditHoaDon(vector<HoaDon>& hoaDon) {
         HoaDon input;
-        cout << "Nhap thong tin hoa don can chinh sua: ";
-      //  input.Nhap();
-        for (int i = 0; i < count; i++) {
-            if (hoaDon[i].maHoaDon != input.maHoaDon) {
+        string maHoaDon;
+        int pos;
+    NhapLai1:
+        system("cls");
+        cout << "\n\n\t\t\t\t\t===== CHINH SUA THONG TIN HOA DON =====\n\n\t";
+        cout << "\n\tNhap ma hoa don can chinh sua: ";
+        cin >> maHoaDon;
+        pos = CheckTonTai(hoaDon, maHoaDon);
+        if (pos == -1) {
+            cout << "\n\tMa hoa don nay khong ton tai. Vui long nhap lai!\n\t";
+            system("pause");
+            goto NhapLai1;
+        }
+        else {
+            int luaChon;
+            string temp;
+        NhapLai2:
+            system("cls");
+            cout << "\n\n\t\t\t\t\t===== CHINH SUA THONG TIN HOA DON =====\n\n\t";
+            Show1HoaDon(hoaDon, maHoaDon);
+            cout << "\n\tChon thong tin can chinh sua:";
+            cout << "\n\t1. Ma khach hang";
+            cout << "\n\t2. Ngay ban";
+            cout << "\n\t-------------";
+            cout << "\n\tNhap lua chon: ";
+            cin >> luaChon;
+            switch (luaChon) {
+            case 1:
+                cout << "\n\tNhap ma khach hang:";
+                cin >> temp;
+                hoaDon[pos].maKhachHang = temp;
+                break;
+            case 2:
+                cout << "\n\tNhap dia chi:";
+                cin >> temp;
+                hoaDon[pos].ngayBan = temp;
+                break;
+            default:
+                cout << "\n\tSo khong hop le. Vui long nhap lai!\n\t";
+                system("pause");
+                goto NhapLai2;
+                break;
+            }
+            for (int i = 0; i < count; i++) {
                 hoaDon[i].WriteToFileHoaDon("hoadontam.txt");
             }
-            else {
-                hoaDon[i] = input;
-                input.WriteToFileHoaDon("khachhangtam.txt");
-            }
+            remove("hoadon.txt");
+            rename("hoadontam.txt", "hoadon.txt");
+            int chon;
+            cout << "\n\tSua doi thanh cong!";
+            cout << "\n\tBan co muon tiep tuc chinh sua?";
+            cout << "\n\t 1. Tiep tuc chinh sua thong tin hoa don hien tai" << "\n\t 2. Chinh sua thong tin cua hoa don khac" << "\n\t 3. Thoat" << endl;
+            cout << "\tLua chon: ";
+            cin >> chon;
+            if (chon == 1) goto NhapLai2;
+            else if (chon == 2) goto NhapLai1;
         }
-        remove("hoadon.txt");
-        rename("hoadontam.txt", "hoadon.txt");
     }
     void HoaDon::WriteToFileHoaDon(string tenFile) {
 		fstream file(tenFile, ios::app);
@@ -223,30 +330,6 @@ int HoaDon::count = 0; //so HoaDon
         count = demSoHoaDon;
         file.close();
     }
-    void HoaDon::setMaHoaDon(string mhd ){
-    	maHoaDon=mhd;
-	}
-    void HoaDon::setMaKhachHang(string mkh){
-    	maKhachHang=mkh;
-	}
-    void HoaDon::setNgayBan(string nb){
-    	ngayBan=nb;
-	}
-    void HoaDon::setTongTien(int tt) {
-    	tongTien=tt;
-	}
-    string HoaDon::getMaHoaDon(){
-		return maHoaDon;
-    }
-    string HoaDon::getMaKhachHang(){
-		return maKhachHang;
-    }
-    string HoaDon::getNgayBan(){
-		return ngayBan;
-    }
-	int HoaDon::getTongTien(){
-		return tongTien;
-    }       
 
 
 

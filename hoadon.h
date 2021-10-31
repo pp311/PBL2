@@ -22,9 +22,11 @@ public:
     static void AddHoaDon(vector<HoaDon>&, vector<KhachHang>&, vector<MayTinh>&);
     static void ReadHoaDon(vector<HoaDon>&);
     void TinhTien();
+    static int CheckTonTai(vector<HoaDon>&, string);
     static void DeleteHoaDon(vector<HoaDon>&);
     static void EditHoaDon(vector <HoaDon>&);
     static void ShowHoaDon(vector<HoaDon>&, vector<KhachHang>&, vector<MayTinh>&);
+    static void Show1HoaDon(vector<HoaDon>&, string);
     void ShowChiTietHoaDon(vector<HoaDon>&, vector<KhachHang>&, vector<MayTinh>&);
     void WriteToFileHoaDon(string);
     void setMaHoaDon(string );
