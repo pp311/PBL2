@@ -22,3 +22,7 @@
 - hàm deletemaytinh thiếu phần xác nhận
 - bỏ hàm thêm hóa đơn (tách ra thành chức năng lập hóa đơn)
 - 
+5/11/2021
+- Thêm chức năng thống kê doanh thu theo khoảng ngày, kiểm tra ngày hợp lệ
+- Bỏ static các hàm Show1...
+- Thêm hàm dịnh dạng tiền (int)14000000 -> (string)14,000,000 VND 

@@ -26,16 +26,13 @@ public:
     static void DeleteHoaDon(vector<HoaDon>&);
     static void EditHoaDon(vector <HoaDon>&);
     static void ShowHoaDon(vector<HoaDon>&, vector<KhachHang>&, vector<MayTinh>&);
-    static void Show1HoaDon(vector<HoaDon>&, string);
+    static void ThongKeHoaDon(vector<HoaDon>&);
+    static void tach(string, int*);
+    static int sosanh(string, string);
+    static int check(string);
+    static string MoneyFormat(int);
+    void Show1HoaDon(vector<HoaDon>&);
     void ShowChiTietHoaDon(vector<HoaDon>&, vector<KhachHang>&, vector<MayTinh>&);
     void WriteToFileHoaDon(string);
-    void setMaHoaDon(string );
-    void setMaKhachHang(string );
-    void setNgayBan(string );
-    void setTongTien(int );
-    string getMaHoaDon();
-    string getMaKhachHang();
-    string getNgayBan();
-	int getTongTien();
 };
 #endif

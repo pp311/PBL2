@@ -36,8 +36,13 @@ int HoaDon::count = 0; //so HoaDon
                 KhachHang::AddKhachHang(khachHang, this->maKhachHang);
             else goto NhapLaiMaKhachHang;
         }
+        NhapLaiNgayBan:
         cout << "\n\tNhap ngay ban: ";
         cin >> this->ngayBan;
+        if (check(this->ngayBan) == -1) {
+            cout<<"Ngay ban khong hop le. Vui long nhap lai!";
+            goto NhapLaiNgayBan;
+        }
         this->soSanPham = 0;
         //this->tongTien = 0;
         while (true) {
@@ -113,9 +118,9 @@ int HoaDon::count = 0; //so HoaDon
         cout << "\n\n\t\t---Danh sach san pham---";
         cout << "\n\t"<<setw(15)<<"Ma May"<<setw(15)<<"So Luong"<<setw(20)<<"Thanh Tien";
         for (int i = 0; i < this->soSanPham; i++) {
-            cout << "\n\t" <<setw(15)<< this->maMay[i] << setw(15) << this->soLuong[i]<< setw(20) << this->donGia[i];
+            cout << "\n\t" <<setw(15)<< this->maMay[i] << setw(15) << this->soLuong[i]<< setw(20) << MoneyFormat(this->donGia[i]);
         }
-        cout << "\n\n\t" << "TONG CONG: " << this->tongTien << " VND"<<"\n\n\t";
+        cout << "\n\n\t" << "TONG CONG: " << MoneyFormat(this->tongTien)<<"\n\n\t";
     }
     void HoaDon::ShowHoaDon(vector<HoaDon>& hoaDon, vector<KhachHang>& khachHang, vector<MayTinh>& mayTinh) {
         Start:
@@ -134,7 +139,7 @@ int HoaDon::count = 0; //so HoaDon
             cout << setw(25) << hoaDon[i].maKhachHang;
             cout << setw(25) << hoaDon[i].ngayBan;
             hoaDon[i].TinhTien();
-            cout << setw(20) << hoaDon[i].tongTien<<endl;
+            cout << setw(20) << MoneyFormat(hoaDon[i].tongTien)<<endl;
         }
         cout << "\n\n\tNhap ma hoa don de xem chi tiet: ";
         cin >> maHoaDon;
@@ -150,7 +155,40 @@ int HoaDon::count = 0; //so HoaDon
         cin >> ch;
         if (ch == 'Y' || ch == 'y') goto Start; 
     }
-    void HoaDon::Show1HoaDon(vector<HoaDon>& hoaDon, string maHoaDon) {
+    void HoaDon::ThongKeHoaDon(vector<HoaDon>& hoaDon) {
+        string d1, d2; int tongDoanhThu = 0;
+        NhapLaiNgay:
+        cout << "\n\n\tNhap ngay bat dau : "; cin >> d1;
+        cout << "\n\tNhap ngay ket thuc: "; cin >> d2;
+        if (sosanh(d2, d1) == 0 || check(d1) == -1 || check(d2) == -1) {
+            cout << "\n\tNgay khong hop le. Vui long nhap lai!";
+            goto NhapLaiNgay;
+        }
+        else {
+            cout << endl << "\t";
+            cout << left << setw(15) << "Ma Hoa Don" << setw(25) << "Ma Khach Hang" << setw(25) << "Ngay Ban" << setw(20) << "Tong tien" << endl;
+            char prev = cout.fill('-');
+            cout.width(80);
+            cout << "\t-";
+            cout.fill(prev);
+            cout << endl;
+            for (int i = 0; i < count; i++) {
+                if (sosanh(d2, hoaDon[i].ngayBan) == 1 && sosanh(hoaDon[i].ngayBan, d1) == 1) {
+                    cout << "\t";
+                    cout << setw(15) << hoaDon[i].maHoaDon;
+                    cout << setw(25) << hoaDon[i].maKhachHang;
+                    cout << setw(25) << hoaDon[i].ngayBan;
+                    hoaDon[i].TinhTien();
+                    cout << setw(20) << MoneyFormat(hoaDon[i].tongTien) << endl;
+                    tongDoanhThu += hoaDon[i].tongTien;
+                }
+            }
+            cout << "\n" << "\tTong doanh thu tu ngay " << d1 << " den ngay " << d2 << " la :" << MoneyFormat(tongDoanhThu);
+            cout << "\n\n\t";
+            system("pause");
+        }
+    }
+    void HoaDon::Show1HoaDon(vector<HoaDon>& hoaDon) {
         cout << endl<<"\t";
         cout << left << setw(15) << "Ma Hoa Don" << setw(25) << "Ma Khach Hang" << setw(25) << "Ngay Ban" << setw(20) << "Tong tien"<<endl;
         char prev = cout.fill('-');
@@ -158,16 +196,12 @@ int HoaDon::count = 0; //so HoaDon
         cout << "\t-";
         cout.fill(prev);
         cout << endl;
-        for (int i = 0; i < count; i++) {
-            if (hoaDon[i].maHoaDon == maHoaDon) {
-                cout << "\t";
-                cout << setw(15) << hoaDon[i].maHoaDon;
-                cout << setw(25) << hoaDon[i].maKhachHang;
-                cout << setw(25) << hoaDon[i].ngayBan;
-                hoaDon[i].TinhTien();
-                cout << setw(20) << hoaDon[i].tongTien << endl;
-            }
-        }
+        cout << "\t";
+        cout << setw(15) << this->maHoaDon;
+        cout << setw(25) << this->maKhachHang;
+        cout << setw(25) << this->ngayBan;
+        this->TinhTien();
+        cout << setw(20) << MoneyFormat(this->tongTien) << endl;
         cout << "\n\n\t";
     }
     void HoaDon::TinhTien() {
@@ -209,7 +243,7 @@ int HoaDon::count = 0; //so HoaDon
             goto NhapLai;
         }
         else {
-            Show1HoaDon(hoaDon, maHoaDon);
+            hoaDon[pos].Show1HoaDon(hoaDon);
             char c;
             cout << "\n\tXac nhan xoa thong tin hoa don nay khoi he thong? <Y/N>";
             cin >> c;
@@ -255,7 +289,7 @@ int HoaDon::count = 0; //so HoaDon
         NhapLai2:
             system("cls");
             cout << "\n\n\t\t\t\t\t===== CHINH SUA THONG TIN HOA DON =====\n\n\t";
-            Show1HoaDon(hoaDon, maHoaDon);
+            hoaDon[pos].Show1HoaDon(hoaDon);
             cout << "\n\tChon thong tin can chinh sua:";
             cout << "\n\t1. Ma khach hang";
             cout << "\n\t2. Ngay ban";
@@ -330,6 +364,71 @@ int HoaDon::count = 0; //so HoaDon
         count = demSoHoaDon;
         file.close();
     }
-
-
-
+    void HoaDon::tach(string d, int a[3]) {
+        string day = d.substr(0, 2);
+        string month = d.substr(3, 2);
+        string year = d.substr(6, 4);
+        a[2] = stoi(day);
+        a[1] = stoi(month);
+        a[0] = stoi(year);
+    }
+    int HoaDon::check(string d) {
+        int ngaymax;
+        int a[3];
+        tach(d, a);
+        if (a[0] < 0 || a[1] < 0 || a[1]> 12 || a[2] < 0 || a[2]> 31)
+            return -1;
+        else {
+            switch (a[1]) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                ngaymax = 31;
+                break;
+            case 2:
+                if ((a[0] % 4 == 0 && a[0] % 100 != 0) || (a[0] % 400 == 0))
+                    ngaymax = 29;
+                else
+                    ngaymax = 28;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                ngaymax = 30;
+                break;
+            }
+            if (a[2] <= ngaymax) return 1;
+            else return -1;
+        }
+    }
+    int HoaDon::sosanh(string d1, string d2) {
+        int i;
+        int a[3], b[3];
+        tach(d1, a);
+        tach(d2, b);
+        if (a[0] > b[0]) return 1;
+        if (a[0] = b[0]) {
+            if (a[1] > b[1]) return 1;
+            if (a[1] = b[1]) {
+                if (a[2] >= b[2]) return 1;
+                else return 0;
+            }
+            else return 0;
+        }
+        return 0;
+    }
+    string HoaDon::MoneyFormat(int donGia) {
+        string s = to_string(donGia);
+        int n = s.length() - 3;
+        while (n > 0) {
+            s.insert(n, ",");
+            n -= 3;
+        }
+        s += " VND";
+        return s;
+    }
