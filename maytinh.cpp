@@ -74,7 +74,7 @@ int MayTinh::count = 0; //so sanpham
             goto NhapLai;
         }
         else {
-        Show1MayTinh(mayTinh, maMay);
+        mayTinh[pos].Show1MayTinh(mayTinh);
         char c;
         cout << "\n\tXac nhan xoa may tinh nay khoi he thong? <Y/N>";
         cin >> c;
@@ -138,8 +138,8 @@ int MayTinh::count = 0; //so sanpham
     }
     void MayTinh::ShowMayTinh(vector<MayTinh>& mayTinh) {
         cout << "\n\n\t\t\t\t\t===== DANH SACH MAY TINH =====\n\n\t";
-        cout <<left<< setw(10)<<"Ma May"<<setw(12)<<"Ten Hang" <<setw(10)<<"CPU" << setw(10)<<"Ram" <<setw(10)<<"Disk"<<setw(18)
-            <<"Nam San Xuat" << setw(15) << "Xuat Xu" << setw(10) << "TGBH" << setw(15) << "Gia" << endl;
+        cout <<left<< setw(10)<<"Ma May"<<setw(12)<<"Ten Hang" <<setw(10)<<"CPU" << setw(10)<<"Ram" <<setw(10)<<"Disk"<<setw(15)
+            <<"Nam San Xuat" << setw(15) << "Xuat Xu" << setw(10) << "TGBH" << setw(18) << "Gia" << endl;
         char prev = cout.fill('-');
         cout.width(105);
         cout << "\t-";
@@ -152,37 +152,34 @@ int MayTinh::count = 0; //so sanpham
             cout << setw(10) << mayTinh[i].cpu ;
             cout << setw(10) << mayTinh[i].ram ;
             cout << setw(10) << mayTinh[i].disk ;
-            cout << setw(18) << mayTinh[i].namSX ;
+            cout << setw(15) << mayTinh[i].namSX ;
             cout << setw(15) << mayTinh[i].xuatXu ;
             cout << setw(10) << mayTinh[i].thoiGianBaoHanh;
-            cout << setw(15) << mayTinh[i].giaBan << endl;
+            cout << setw(18) << mayTinh[i].getGiaBanMoneyFormat() << endl;
         }
         cout << "\n\n\n\t";
     }
-    void MayTinh::Show1MayTinh(vector<MayTinh>& mayTinh, string maMay) {
+    void MayTinh::Show1MayTinh(vector<MayTinh>& mayTinh) {
         cout << "\n\n\t";
-        cout << left << setw(10) << "Ma May" << setw(12) << "Ten Hang" << setw(10) << "CPU" << setw(10) << "Ram" << setw(10) << "Disk" << setw(18) << "Nam San Xuat" << setw(15) << "Xuat Xu" << setw(10) << "TGBH" << setw(15) << "Gia" << endl;
+        cout << left << setw(10) << "Ma May" << setw(12) << "Ten Hang" << setw(10) << "CPU" << setw(10) << "Ram" << setw(10) << "Disk" << setw(15) << "Nam San Xuat" << setw(15) << "Xuat Xu" << setw(10) << "TGBH" << setw(15) << "Gia" << endl;
         char prev = cout.fill('-');
         cout.width(105);
         cout << "\t-";
         cout.fill(prev);
         cout << endl;
-        for (int i = 0; i < count; i++) {
-            if (mayTinh[i].maMay == maMay) {
-                cout << "\t";
-                cout << setw(10) << mayTinh[i].maMay;
-                cout << setw(12) << mayTinh[i].tenHang;
-                cout << setw(10) << mayTinh[i].cpu;
-                cout << setw(10) << mayTinh[i].ram;
-                cout << setw(10) << mayTinh[i].disk;
-                cout << setw(18) << mayTinh[i].namSX;
-                cout << setw(15) << mayTinh[i].xuatXu;
-                cout << setw(10) << mayTinh[i].thoiGianBaoHanh;
-                cout << setw(15) << mayTinh[i].giaBan << endl;
-            }
-        }
+        cout << "\t";
+        cout << setw(10) << this->maMay;
+        cout << setw(12) << this->tenHang;
+        cout << setw(10) << this->cpu;
+        cout << setw(10) << this->ram;
+        cout << setw(10) << this->disk;
+        cout << setw(15) << this->namSX;
+        cout << setw(15) << this->xuatXu;
+        cout << setw(10) << this->thoiGianBaoHanh;
+        cout << setw(18) << this->getGiaBanMoneyFormat() << endl;
         cout << "\n\n\t";
     }
+    
     void MayTinh::ShowKho(vector<MayTinh>& mayTinh) {
         cout << "\n\n\t\t\t\t\t\t===== THONG TIN KHO =====\n\n\t";
 
@@ -265,7 +262,7 @@ int MayTinh::count = 0; //so sanpham
         NhapLai2:
             system("cls");
             cout << "\n\n\t\t\t\t\t===== CHINH SUA THONG TIN MAY TINH =====\n\n\t";
-            Show1MayTinh(mayTinh, maMay);
+            mayTinh[pos].Show1MayTinh(mayTinh);
             cout << "\n\tChon thong tin can chinh sua:";
             cout << "\n\t1. Ten Hang";
             cout << "\n\t2. CPU";
@@ -342,5 +339,14 @@ int MayTinh::count = 0; //so sanpham
             else if (chon == 2) goto NhapLai1;
         }
     }
-
+    string MayTinh::getGiaBanMoneyFormat() {
+        string s = to_string(this->giaBan);
+        int n = s.length() - 3;
+        while (n > 0) {
+            s.insert(n, ",");
+            n -= 3;
+        }
+        s += " VND";
+        return s;
+    }
 

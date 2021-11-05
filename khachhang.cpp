@@ -63,7 +63,7 @@ int KhachHang::count = 0; //so KhachHang
         }
         cout << "\n\n\t";
     }
-    void KhachHang::Show1KhachHang(vector<KhachHang>& khachHang, string maKhachHang) {
+    void KhachHang::Show1KhachHang(vector<KhachHang>& khachHang) {
         cout << "\n\n\t";
         cout << left << setw(17) << "Ma Khach Hang" << setw(20) << "Ten Khach Hang" << setw(12) << "Nam Sinh" << setw(12) << "GioiTinh" 
             << setw(15) << "So DT" << setw(30) << "Dia Chi" << endl;
@@ -72,17 +72,13 @@ int KhachHang::count = 0; //so KhachHang
         cout << "\t-";
         cout.fill(prev);
         cout << endl;
-        for (int i = 0; i < count; i++) {
-            if (khachHang[i].maKhachHang == maKhachHang) {
-                cout << "\t";
-                cout << setw(17) << khachHang[i].maKhachHang;
-                cout << setw(20) << khachHang[i].tenKhachHang;
-                cout << setw(12) << khachHang[i].namSinh;
-                cout << setw(12) << khachHang[i].gioiTinh;
-                cout << setw(15) << khachHang[i].dienThoai;
-                cout << setw(30) << khachHang[i].diaChi << endl;
-            }
-        }
+        cout << "\t";
+        cout << setw(17) << this->maKhachHang;
+        cout << setw(20) << this->tenKhachHang;
+        cout << setw(12) << this->namSinh;
+        cout << setw(12) << this->gioiTinh;
+        cout << setw(15) << this->dienThoai;
+        cout << setw(30) << this->diaChi << endl;
         cout << "\n\n\t";
     }
     //ReadKhachHang
@@ -123,7 +119,7 @@ int KhachHang::count = 0; //so KhachHang
             goto NhapLai;
         }
         else {
-            Show1KhachHang(khachHang, maKhachHang);
+            khachHang[pos].Show1KhachHang(khachHang);
             char c;
             cout << "\n\tXac nhan xoa thong tin khach hang nay khoi he thong? <Y/N>";
             cin >> c;
@@ -169,7 +165,7 @@ int KhachHang::count = 0; //so KhachHang
         NhapLai2:
             system("cls");
             cout << "\n\n\t\t\t\t\t===== CHINH SUA THONG TIN KHACH HANG =====\n\n\t";
-            Show1KhachHang(khachHang, maKhachHang);
+            khachHang[pos].Show1KhachHang(khachHang);
             cout << "\n\tChon thong tin can chinh sua:";
             cout << "\n\t1. Ten khach hang";
             cout << "\n\t2. Dia chi";
@@ -233,48 +229,6 @@ int KhachHang::count = 0; //so KhachHang
         file << this->maKhachHang << "\t" << this->tenKhachHang << "\t" <<  this->namSinh << "\t" << this->gioiTinh <<"\t" 
             << this->dienThoai << "\t" << this->diaChi << "\n";
         file.close();
-    }
-    void KhachHang::setMaKhachHang(string mkh)
-    {
-    	maKhachHang=mkh;
-	}
-	void KhachHang::setTenKhachHang(string tkh)
-    {
-    	tenKhachHang=tkh;
-	}
-	void KhachHang::setDiaChi(string dc)
-    {
-    	diaChi=dc;
-	}
-	void KhachHang::setDienThoai(string dt)
-    {
-    	dienThoai=dt;
-	}
-	void KhachHang::setNamSinh(int ns)
-    {
-    	namSinh=ns;
-	}
-	void KhachHang::setGioiTinh(string gt)
-    {
-    	gioiTinh=gt;
-	}
-    string KhachHang::getMaKhachHang(){
-    return maKhachHang;
-    }
-    string KhachHang::getTenKhachHang(){
-    return tenKhachHang;
-    }
-    string KhachHang::getDiaChi(){
-    return diaChi;
-    }
-    string KhachHang::getDienThoai(){
-    return dienThoai;
-    }
-    int KhachHang::getNamSinh(){
-    return namSinh;
-    }    
-    string KhachHang::getGioiTinh(){
-    return gioiTinh;
     }
 
 

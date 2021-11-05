@@ -234,7 +234,8 @@ void Menu::MainMenu() {
             break;
         case 7:
             // cout << "\n6. Thoat";
-            return;
+            HoaDon::ThongKeHoaDon(hoaDon);
+            break;
         case 8:
             return;
         default:
