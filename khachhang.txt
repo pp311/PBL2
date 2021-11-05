@@ -1,0 +1,4 @@
+kh001	Phuc Phan	2002	Nam	0123	09 Cao Thang
+kh002	Doan Quoc	2002	Nam	0234	05 Ton Duc Thang
+kh003	Truong Thanh Dat	2002	Nam	0456	123 Hung Vuong
+kh004	Nguyen Long	2000	Nam	0975	67 Tran Cao Van

@@ -4,27 +4,35 @@
 #include <vector>
 using namespace std;
 class KhachHang {
-        std::string maKhachHang;
-        std::string tenKhachHang;
-        string diaChi, dienThoai, ngaySinh;
+        string maKhachHang;
+        string tenKhachHang;
+        string diaChi, dienThoai;
+        int namSinh;
         string gioiTinh;
    
     static int count;
 public:
-    void Nhap();
-    static void CreateKhachHang(vector<KhachHang>);
+    void Nhap(vector<KhachHang>& , string);
+    static void AddKhachHang(vector<KhachHang>&, string = "");
+    static void ReadKhachHang(vector<KhachHang>&);
+    static void DeleteKhachHang(vector<KhachHang>&);
+    static void EditKhachHang(vector<KhachHang>&);
+    static void ShowKhachHang(vector<KhachHang>&);
+    static void Show1KhachHang(vector<KhachHang>&, string);
+    static int CheckTonTai(vector<KhachHang>&, string);
+    void WriteToFileKhachHang(string);
     void setMaKhachHang(string);
     void setTenKhachHang(string);
     void setDiaChi(string);
     void setDienThoai(string);
-    void setNgaySinh(string);
+    void setNamSinh(int);
     void setGioiTinh(string);
     string getMaKhachHang();
     string getTenKhachHang();
     string getDiaChi();
     string getDienThoai();
-    string getNgaySinh();
+    int getNamSinh();
     string getGioiTinh();   
-    static void ReadKhachHang(vector<KhachHang>);
+    friend class HoaDon;
 };
 #endif
