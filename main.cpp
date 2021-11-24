@@ -1,14 +1,13 @@
-﻿using namespace std;
-#include "khachhang.h"
+﻿#include "khachhang.h"
 #include "maytinh.h"
 #include "hoadon.h"
-#include "thongtinhoadon.h"
 #include "menu.h"
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
 #include <iomanip>
 #include <Windows.h>
+using namespace std;
 string t5();
 void tiepTuc();
 vector<MayTinh> mayTinh;
@@ -16,7 +15,6 @@ vector<HoaDon> hoaDon;
 vector<KhachHang> khachHang;
 
 int main() {
-    //system("color 05");
     MayTinh::ReadMayTinh(mayTinh);
     KhachHang::ReadKhachHang(khachHang);
     HoaDon::ReadHoaDon(hoaDon);

@@ -12,7 +12,7 @@ int HoaDon::count = 0; //so HoaDon
     void HoaDon::Nhap(vector<HoaDon>& hoaDon, vector<KhachHang>& khachHang, vector<MayTinh>& mayTinh)
     {
         cout << "\n\n\t\t\t\t\t===== LAP HOA DON =====\n\n\t";
-        NhapLaiMaHoaDon:
+        /*NhapLaiMaHoaDon:
         cout << "\n\tNhap ma hoa don: ";
         cin >> this->maHoaDon;
         for (int i = 0; i < count; i++) {
@@ -20,7 +20,13 @@ int HoaDon::count = 0; //so HoaDon
                 cout << "\n\tMa hoa don nay da ton tai, vui long nhap lai!";
                 goto NhapLaiMaHoaDon;
             }
-        }
+        }*/
+        string preMHD = hoaDon[count - 1].maHoaDon;
+        preMHD = preMHD.substr(2);
+        string maHoaDon = "hd";
+        maHoaDon += to_string(stoi(preMHD) + 1);
+        this->maHoaDon = maHoaDon;
+        cout << "\n\tMa hoa don hien tai la " << maHoaDon;
         NhapLaiMaKhachHang:
         cout << "\n\tNhap ma khach hang: ";
         cin >> this->maKhachHang;
@@ -80,7 +86,6 @@ int HoaDon::count = 0; //so HoaDon
                         goto NhapLaiLuaChon;
                     }
                 }
-
                 mayTinh[i].soLuong -= this->soLuong[this->soSanPham];  //tru vao kho
                 for (int i = 0; i < MayTinh::count; i++) {
                     mayTinh[i].WriteToFileMayTinh("maytinhtam.txt");
@@ -88,6 +93,13 @@ int HoaDon::count = 0; //so HoaDon
                 remove("maytinh.txt");
                 rename("maytinhtam.txt", "maytinh.txt");
             //this->tongTien += this->donGia[this->soSanPham] * this->soLuong[this->soSanPham];
+                for (int i = 0; i < this->soSanPham; i++) { //kiem tra xem mat hang vua them vao da co trong hoa don chua, neu co thi cong vao so luong cua mat hang do
+                    if (this->maMay[this->soSanPham] == this->maMay[i]) {
+                        this->soLuong[i] += this->soLuong[this->soSanPham];
+                        this->soSanPham--;
+                        break;
+                    }
+                }
             this->soSanPham++;
             char c;
             cout << "\n\tMua tiep? <Y/N>";
@@ -115,10 +127,10 @@ int HoaDon::count = 0; //so HoaDon
                 break;
             }
         }
-        cout << "\n\n\t\t---Danh sach san pham---";
-        cout << "\n\t"<<setw(15)<<"Ma May"<<setw(15)<<"So Luong"<<setw(20)<<"Thanh Tien";
+        cout << "\n\n\t\t\t---Danh sach san pham---";
+        cout << "\n\n\t"<<setw(15)<<"Ma May"<<setw(15)<<"So Luong"<<setw(20)<<"Don gia"<<setw(20)<<"Thanh tien";
         for (int i = 0; i < this->soSanPham; i++) {
-            cout << "\n\t" <<setw(15)<< this->maMay[i] << setw(15) << this->soLuong[i]<< setw(20) << MoneyFormat(this->donGia[i]);
+            cout << "\n\t" <<setw(15)<< this->maMay[i] << setw(15) << this->soLuong[i]<< setw(20) << MoneyFormat(this->donGia[i])<<setw(20)<<MoneyFormat(this->donGia[i]*this->soLuong[i]);
         }
         cout << "\n\n\t" << "TONG CONG: " << MoneyFormat(this->tongTien)<<"\n\n\t";
     }
@@ -183,7 +195,7 @@ int HoaDon::count = 0; //so HoaDon
                     tongDoanhThu += hoaDon[i].tongTien;
                 }
             }
-            cout << "\n" << "\tTong doanh thu tu ngay " << d1 << " den ngay " << d2 << " la :" << MoneyFormat(tongDoanhThu);
+            cout << "\n" << "\tTong doanh thu tu ngay " << d1 << " den ngay " << d2 << " la: " << MoneyFormat(tongDoanhThu);
             cout << "\n\n\t";
             system("pause");
         }
