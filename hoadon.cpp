@@ -136,9 +136,9 @@ int HoaDon::count = 0; //so HoaDon
     }
     void HoaDon::ShowHoaDon(vector<HoaDon>& hoaDon, vector<KhachHang>& khachHang, vector<MayTinh>& mayTinh) {
         Start:
-        system("cls");
+        //system("cls");
         string maHoaDon;
-        cout << "\n\n\t\t\t\t\t===== DANH SACH HOA DON =====\n\n\t";
+        
         cout << left << setw(15) << "Ma Hoa Don" << setw(25) << "Ma Khach Hang" << setw(25) << "Ngay Ban" << setw(20) << "Tong tien"<<endl;
         char prev = cout.fill('-');
         cout.width(80);
@@ -246,6 +246,20 @@ int HoaDon::count = 0; //so HoaDon
     NhapLai:
         system("cls");
         cout << "\n\n\t\t\t\t\t===== XOA THONG TIN HOA DON =====\n\n\t";
+        cout << left << setw(15) << "Ma Hoa Don" << setw(25) << "Ma Khach Hang" << setw(25) << "Ngay Ban" << setw(20) << "Tong tien" << endl;
+        char prev = cout.fill('-');
+        cout.width(80);
+        cout << "\t-";
+        cout.fill(prev);
+        cout << endl;
+        for (int i = 0; i < count; i++) {
+            cout << "\t";
+            cout << setw(15) << hoaDon[i].maHoaDon;
+            cout << setw(25) << hoaDon[i].maKhachHang;
+            cout << setw(25) << hoaDon[i].ngayBan;
+            hoaDon[i].TinhTien();
+            cout << setw(20) << MoneyFormat(hoaDon[i].tongTien) << endl;
+        }
         cout << "\n\tNhap ma hoa don can xoa: ";
         cin >> maHoaDon;
         pos = CheckTonTai(hoaDon, maHoaDon);
@@ -275,7 +289,7 @@ int HoaDon::count = 0; //so HoaDon
         cout << "\n\tXoa thanh cong!";
         int chon;
         cout << "\n\tBan co muon tiep tuc xoa?";
-        cout << "\n\t 1. Co" << "\n 2. Khong" << endl;
+        cout << "\n\t 1. Co" << "\n\t 2. Khong" << endl;
         cout << "\n\tLua chon: ";
         cin >> chon;
         if (chon == 1) goto NhapLai;
@@ -287,6 +301,20 @@ int HoaDon::count = 0; //so HoaDon
     NhapLai1:
         system("cls");
         cout << "\n\n\t\t\t\t\t===== CHINH SUA THONG TIN HOA DON =====\n\n\t";
+        cout << left << setw(15) << "Ma Hoa Don" << setw(25) << "Ma Khach Hang" << setw(25) << "Ngay Ban" << setw(20) << "Tong tien" << endl;
+        char prev = cout.fill('-');
+        cout.width(80);
+        cout << "\t-";
+        cout.fill(prev);
+        cout << endl;
+        for (int i = 0; i < count; i++) {
+            cout << "\t";
+            cout << setw(15) << hoaDon[i].maHoaDon;
+            cout << setw(25) << hoaDon[i].maKhachHang;
+            cout << setw(25) << hoaDon[i].ngayBan;
+            hoaDon[i].TinhTien();
+            cout << setw(20) << MoneyFormat(hoaDon[i].tongTien) << endl;
+        }
         cout << "\n\tNhap ma hoa don can chinh sua: ";
         cin >> maHoaDon;
         pos = CheckTonTai(hoaDon, maHoaDon);
@@ -305,6 +333,7 @@ int HoaDon::count = 0; //so HoaDon
             cout << "\n\tChon thong tin can chinh sua:";
             cout << "\n\t1. Ma khach hang";
             cout << "\n\t2. Ngay ban";
+            cout << "\n\t3. Thoat";
             cout << "\n\t-------------";
             cout << "\n\tNhap lua chon: ";
             cin >> luaChon;
@@ -319,11 +348,12 @@ int HoaDon::count = 0; //so HoaDon
                 cin >> temp;
                 hoaDon[pos].ngayBan = temp;
                 break;
+            case 3:
+                return;
             default:
                 cout << "\n\tSo khong hop le. Vui long nhap lai!\n\t";
                 system("pause");
                 goto NhapLai2;
-                break;
             }
             for (int i = 0; i < count; i++) {
                 hoaDon[i].WriteToFileHoaDon("hoadontam.txt");
@@ -418,7 +448,7 @@ int HoaDon::count = 0; //so HoaDon
             else return -1;
         }
     }
-    int HoaDon::sosanh(string d1, string d2) {
+    /*int HoaDon::sosanh(string d1, string d2) {
         int i;
         int a[3], b[3];
         tach(d1, a);
@@ -433,6 +463,18 @@ int HoaDon::count = 0; //so HoaDon
             else return 0;
         }
         return 0;
+    }*/
+    int HoaDon::sosanh(string d1, string d2) {
+        int i;
+        int a[3], b[3];
+        tach(d1, a);
+        tach(d2, b);
+        if (a[0] > b[0]) return 1;
+        else if (a[0] < b[0]) return 0;
+        else if (a[1] > b[1]) return 1;
+        else if (a[1] < b[1]) return 0;
+        else if (a[2] >= b[2]) return 1;
+        else return 0;
     }
     string HoaDon::MoneyFormat(int donGia) {
         string s = to_string(donGia);

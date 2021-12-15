@@ -65,6 +65,7 @@ int MayTinh::count = 0; //so sanpham
     NhapLai:
         system("cls");
         cout << "\n\n\t\t\t\t\t===== XOA THONG TIN MAY TINH =====\n\n\t";
+        ShowMayTinh(mayTinh);
         cout << "\n\n\tNhap ma may tinh can xoa: ";
         cin >> maMay;
         pos = CheckTonTai(mayTinh, maMay);
@@ -137,7 +138,7 @@ int MayTinh::count = 0; //so sanpham
         file.close();
     }
     void MayTinh::ShowMayTinh(vector<MayTinh>& mayTinh) {
-        cout << "\n\n\t\t\t\t\t===== DANH SACH MAY TINH =====\n\n\t";
+        
         cout <<left<< setw(10)<<"Ma May"<<setw(12)<<"Ten Hang" <<setw(10)<<"CPU" << setw(10)<<"Ram" <<setw(10)<<"Disk"<<setw(15)
             <<"Nam San Xuat" << setw(15) << "Xuat Xu" << setw(10) << "TGBH" << setw(18) << "Gia" << endl;
         char prev = cout.fill('-');
@@ -181,7 +182,7 @@ int MayTinh::count = 0; //so sanpham
     }
     
     void MayTinh::ShowKho(vector<MayTinh>& mayTinh) {
-        cout << "\n\n\t\t\t\t\t\t===== THONG TIN KHO =====\n\n\t";
+        
 
         cout << left << setw(20) << "Ma May" << setw(20) << "So Luong"<<endl;
         char prev = cout.fill('-');
@@ -204,6 +205,7 @@ int MayTinh::count = 0; //so sanpham
         system("cls");
         tonTai = false;
         cout << "\n\n\t\t\t\t\t\t===== NHAP HANG VE =====\n\n\t";
+        ShowKho(mayTinh);
         cout << "\n\tNhap ma may tinh: ";
         cin >> maMay;
         int i = 0;
@@ -247,6 +249,7 @@ int MayTinh::count = 0; //so sanpham
     NhapLai1:
         system("cls");
         cout << "\n\n\t\t\t\t\t===== CHINH SUA THONG TIN MAY TINH =====\n\n\t";
+        ShowMayTinh(mayTinh);
         cout << "\n\tNhap ma may tinh can chinh sua: ";
         cin >> maMay;
         pos = CheckTonTai(mayTinh, maMay);
@@ -272,6 +275,7 @@ int MayTinh::count = 0; //so sanpham
             cout << "\n\t6. Xuat xu";
             cout << "\n\t7. Thoi gian bao hanh";
             cout << "\n\t8. Gia ban";
+            cout << "\n\t9. Thoat";
             cout << "\n\t-------------";
             cout << "\n\tNhap lua chon: ";
             cin >> luaChon;
@@ -317,11 +321,13 @@ int MayTinh::count = 0; //so sanpham
                 cin >> num;
                 mayTinh[pos].giaBan = num;
                 break;
+            case 9:
+                return;
             default:
                 cout << "\n\tSo khong hop le. Vui long nhap lai!\n\t";
                 system("pause");
                 goto NhapLai2;
-                break;
+                
             }
             for (int i = 0; i < count; i++) {
                 mayTinh[i].WriteToFileMayTinh("maytinhtam.txt");

@@ -48,21 +48,25 @@ void Menu::LietKeThongTin() {
         switch (key) {
         case 1:
             system("cls");
+            cout << "\n\n\t\t\t\t\t===== DANH SACH MAY TINH =====\n\n\t";
             MayTinh::ShowMayTinh(mayTinh);
             tiepTuc();
             break;
         case 2:
             system("cls");
+            cout << "\n\n\t\t\t\t\t===== DANH SACH HOA DON =====\n\n\t";
             HoaDon::ShowHoaDon(hoaDon, khachHang, mayTinh);
             tiepTuc();
             break;
         case 3:
             system("cls");
+            cout << "\n\n\t\t\t\t\t===== DANH SACH KHACH HANG =====\n\n\t";
             KhachHang::ShowKhachHang(khachHang);
             tiepTuc();
             break;
         case 4:
             system("cls");
+            cout << "\n\n\t\t\t\t\t\t===== THONG TIN KHO =====\n\n\t";
             MayTinh::ShowKho(mayTinh);
             tiepTuc();
             break;

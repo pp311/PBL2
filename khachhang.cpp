@@ -44,7 +44,7 @@ int KhachHang::count = 0; //so KhachHang
     }
     //ShowKhachHang
     void KhachHang::ShowKhachHang(vector<KhachHang>& khachHang) {
-        cout << "\n\n\t\t\t\t\t\tDANH SACH KHACH HANG\n\n\t";
+        
         cout <<left << setw(17) << "Ma Khach Hang" << setw(20) << "Ten Khach Hang" << setw(12) << "Nam Sinh" 
             << setw(12) << "Gioi Tinh" << setw(15) << "So DT" << setw(30) << "Dia Chi"<<endl;
         char prev = cout.fill('-');
@@ -110,6 +110,7 @@ int KhachHang::count = 0; //so KhachHang
     NhapLai:
         system("cls");
         cout << "\n\n\t\t\t\t\t===== XOA THONG TIN KHACH HANG =====\n\n\t";
+        ShowKhachHang(khachHang);
         cout << "\n\tNhap ma khach hang can xoa: ";
         cin >> maKhachHang;
         pos = CheckTonTai(khachHang, maKhachHang);
@@ -150,6 +151,7 @@ int KhachHang::count = 0; //so KhachHang
     NhapLai1:
         system("cls");
         cout << "\n\n\t\t\t\t\t===== CHINH SUA THONG TIN KHACH HANG =====\n\n\t";
+        ShowKhachHang(khachHang);
         cout << "\n\tNhap ma khach hang can chinh sua: ";
         cin >> maKhachHang;
         pos = CheckTonTai(khachHang, maKhachHang);
@@ -172,6 +174,7 @@ int KhachHang::count = 0; //so KhachHang
             cout << "\n\t3. Dien thoai";
             cout << "\n\t4. Nam sinh";
             cout << "\n\t5. Gioi tinh";
+            cout << "\n\t6. Thoat";
             cout << "\n\t-------------";
             cout << "\n\tNhap lua chon:";
             cin >> luaChon;
@@ -201,11 +204,12 @@ int KhachHang::count = 0; //so KhachHang
                 cin >> temp;
                 khachHang[pos].gioiTinh = temp;
                 break;
+            case 6:
+                return;
             default:
                 cout << "\n\tSo khong hop le. Vui long nhap lai!\n\t";
                 system("pause");
                 goto NhapLai2;
-                break;
             }
             for (int i = 0; i < count; i++) {
                 khachHang[i].WriteToFileKhachHang("khachhangtam.txt");
