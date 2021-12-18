@@ -54,7 +54,7 @@ void Menu::LietKeThongTin() {
             break;
         case 2:
             system("cls");
-            cout << "\n\n\t\t\t\t\t===== DANH SACH HOA DON =====\n\n\t";
+            
             HoaDon::ShowHoaDon(hoaDon, khachHang, mayTinh);
             tiepTuc();
             break;

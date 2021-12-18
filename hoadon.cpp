@@ -26,7 +26,8 @@ int HoaDon::count = 0; //so HoaDon
         string maHoaDon = "hd";
         maHoaDon += to_string(stoi(preMHD) + 1);
         this->maHoaDon = maHoaDon;
-        cout << "\n\tMa hoa don hien tai la " << maHoaDon;
+        cout << "\n\tMa hoa don hien tai la " << maHoaDon<<"\n\n\t";
+        KhachHang::ShowKhachHang(khachHang);
         NhapLaiMaKhachHang:
         cout << "\n\tNhap ma khach hang: ";
         cin >> this->maKhachHang;
@@ -51,6 +52,8 @@ int HoaDon::count = 0; //so HoaDon
         }
         this->soSanPham = 0;
         //this->tongTien = 0;
+        cout << "\n\n\t";
+        MayTinh::ShowMayTinh(mayTinh);
         while (true) {
             NhapLaiMaMay:
             cout << "\n\tNhap ma san pham: ";
@@ -74,8 +77,8 @@ int HoaDon::count = 0; //so HoaDon
             cin >> this->soLuong[this->soSanPham];
                 if (mayTinh[i].soLuong < this->soLuong[this->soSanPham]) {
                     int luaChon;
-                    cout << "\n\tSo luong may tinh tron kho khong du!\n\tSo luong con hien tai: " << mayTinh[i].soLuong;
-                    cout << "\n\t1. Nhap lai so luong\n\t2.Chon may khac";
+                    cout << "\n\tSo luong may tinh trong kho khong du!\n\tSo luong con hien tai: " << mayTinh[i].soLuong;
+                    cout << "\n\t1. Nhap lai so luong\n\t2. Chon may khac";
                     cout << "\n\t-------\n\tLua chon: ";
                 NhapLaiLuaChon:
                     cin >> luaChon;
@@ -136,9 +139,9 @@ int HoaDon::count = 0; //so HoaDon
     }
     void HoaDon::ShowHoaDon(vector<HoaDon>& hoaDon, vector<KhachHang>& khachHang, vector<MayTinh>& mayTinh) {
         Start:
-        //system("cls");
+        system("cls");
         string maHoaDon;
-        
+        cout << "\n\n\t\t\t\t\t===== DANH SACH HOA DON =====\n\n\t";
         cout << left << setw(15) << "Ma Hoa Don" << setw(25) << "Ma Khach Hang" << setw(25) << "Ngay Ban" << setw(20) << "Tong tien"<<endl;
         char prev = cout.fill('-');
         cout.width(80);

@@ -18,7 +18,7 @@ int MayTinh::count = 0; //so sanpham
         else this->maMay = maMay;
         if (CheckTonTai(mayTinh, this->maMay) != -1) {
             cout << "\n\tMa may nay da ton tai. Vui long nhap lai!\n\t";
-            system("pause");
+            //system("pause");
             goto NhapLai;
         }
         cout << "\n\tNhap ten hang: ";
@@ -56,7 +56,7 @@ int MayTinh::count = 0; //so sanpham
         mayTinh[count].WriteToFileMayTinh("maytinh.txt");
         count++;
         int chon;
-        cout << "\n\n\tThem thanh cong";
+        cout << "\n\n\tThem thanh cong!\n";
     }
     //delete may tinh
     void MayTinh::DeleteMayTinh(vector<MayTinh>& mayTinh) {
